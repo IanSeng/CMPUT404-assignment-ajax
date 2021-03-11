@@ -41,11 +41,9 @@ class World:
         entry = self.space.get(entity,dict())
         entry[key] = value
         self.space[entity] = entry
-        print(self.space)
 
     def set(self, entity, data):
         self.space[entity] = data
-        print(self.space)
 
     def clear(self):
         self.space = dict()
