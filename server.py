@@ -84,7 +84,7 @@ def update(entity):
     '''update the entities via this interface'''
     data = flask_post_json()
     myWorld.set(entity, data)
-    return Response(json.dumps(data), status=201, mimetype='application/json')
+    return Response(json.dumps(data), status=200, mimetype='application/json')
 
 # Test: curl -v   -H "Content-Type: application/json" -X GET http://127.0.0.1:5000/world     
 @app.route("/world", methods=['POST','GET'])    
@@ -102,8 +102,7 @@ def get_entity(entity):
 @app.route("/clear", methods=['POST','GET'])
 def clear():
     '''Clear the world out!'''
-    return Response(json.dumps(myWorld.clear()), status=204, mimetype='application/json')
-    return None
+    return Response(json.dumps(myWorld.clear()), status=200, mimetype='application/json')
 
 if __name__ == "__main__":
     app.run()
