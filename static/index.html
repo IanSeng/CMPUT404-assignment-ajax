@@ -31,7 +31,7 @@ var context = canvas.getContext("2d");
 var W = canvas.width  = window.innerWidth-6;
 var H = canvas.height = window.innerHeight-50;
 
-
+// Derived & referenced to MDM Web Docs Link: https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/send
 function sendJSONXMLHTTPRequest(url, objects, callback) {
     var xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function () {
@@ -63,7 +63,7 @@ function getSchemeAndHost() {
 
 world = {};
 
-// Reference to MDN web doc, Link: https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/strokeStyle
+// Referenced to MDN web doc, Link: https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/strokeStyle
 //XXX: TODO Make this prettier!
 function drawCircle(context,entity) {
     with(context) {
@@ -73,7 +73,6 @@ function drawCircle(context,entity) {
         var y = entity["y"];
         //moveTo(x,y);
         fillStyle = entity["colour"];
-        // strokeStyle = fillStyle;
         context.lineWidth = 8;
         strokeStyle = 'rgba(255,255,255, 0.3)';
         arc(x, y, (entity["radius"])?entity["radius"]:50, 0, 2.0 * Math.PI, false);  
@@ -150,8 +149,8 @@ function addEntity(entity, data) {
     world[entity] = data;
     drawNextFrame(); // (but should we?)
     //XXX: Send a XHTML Request that updates the entity you just  modified!
-    url = getSchemeAndHost() + '/entity/' + entity
-    sendJSONXMLHTTPRequest(url,data, res=> {});
+    url = 'http://' + host  + '/entity/' + entity
+    sendJSONXMLHTTPRequest(url, data, res=> {});
 }
 
 var counter = 0;
@@ -277,8 +276,7 @@ mouse.mousedraggers.push(function(x,y,clicked,e) {
 
 function update() {
     //XXX: TODO Get the world from the webservice using a XMLHTTPRequest 
-    url = getSchemeAndHost() + '/world'
-    // console.log(url)
+    url = 'http://' + host  + '/world'
     sendJSONXMLHTTPRequest(url, null, (res) => {
         world = res
     })
